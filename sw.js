@@ -1,5 +1,5 @@
-const CACHE_NAME = 'todo-offline-dual-handoff-pwa-v20260530-0012';
-const APP_SHELL = [
+const CACHE_NAME = 'task-manager-v1.3';
+const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.webmanifest',
@@ -7,41 +7,48 @@ const APP_SHELL = [
   './icons/icon-512.png'
 ];
 
-self.addEventListener('install', function(event) {
+// 安装阶段：缓存核心资源
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(function(cache) {
-      return cache.addAll(APP_SHELL);
-    }).then(function() {
-      return self.skipWaiting();
-    })
+    caches.open(CACHE_NAME)
+      .then(cache => cache.addAll(ASSETS_TO_CACHE))
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', function(event) {
+// 激活阶段：清理旧版本缓存
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then(function(keys) {
-      return Promise.all(keys.map(function(key) {
-        if (key !== CACHE_NAME) return caches.delete(key);
-      }));
-    }).then(function() {
-      return self.clients.claim();
+    caches.keys().then(cacheNames => {
+      return Promise.all(
+        cacheNames.map(cacheName => {
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
     })
   );
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', function(event) {
-  if (event.request.method !== 'GET') return;
+// 拦截请求：网络优先 (Network First)，失败时回退到缓存
+self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(function(cached) {
-      return cached || fetch(event.request).then(function(response) {
-        var copy = response.clone();
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, copy);
-        });
+    fetch(event.request)
+      .then(response => {
+        // 如果获取到有效响应，更新缓存
+        if (response && response.status === 200 && response.type === 'basic') {
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, responseToCache);
+          });
+        }
         return response;
-      }).catch(function() {
-        return caches.match('./index.html');
-      });
-    })
+      })
+      .catch(() => {
+        // 网络不通（如离线）时，从缓存读取
+        return caches.match(event.request);
+      })
   );
 });
