@@ -7,225 +7,178 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="任务接力">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#EAB84B">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23EAB84B'/><path d='M25 50l18 18 35-35' stroke='%23451E02' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<meta name="theme-color" content="#2563eb">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232563eb'/><path d='M25 50l18 18 35-35' stroke='white' stroke-width='8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
 <link rel="manifest" href="manifest.webmanifest">
 <title>任务管理</title>
 <style>
 :root {
-    /* 主题基调：焦糖奶咖 */
-    --bg: #FDF9F1;
-    --sidebar-bg: #FFFFFF;
-    --card-bg: #FFFFFF;
-    --border: #EADCD0;
-    
-    /* 文字体系 */
-    --text: #451E02;
-    --text-secondary: rgba(69, 30, 2, 0.65);
-    --text-disabled: rgba(69, 30, 2, 0.4);
-    
-    /* 核心主色系 */
-    --primary: #EAB84B;
-    --primary-hover: #F1C86D;
-    --primary-active: #D4A137;
-    --primary-light: #F5D9AF; /* 奶杏绒 */
-    
-    /* 分类状态色（大地色系：高辨识度区分） */
-    --zhengshi: #A64C38; /* 铁锈红（正事，重要感） */
-    --zhengshi-bg: rgba(166, 76, 56, 0.08);
-    --zashi: #B88230; /* 琥珀黄（杂事，温和感） */
-    --zashi-bg: rgba(184, 130, 48, 0.1);
-    --shenghuo: #5C7A58; /* 鼠尾草绿（生活，松弛感） */
-    --shenghuo-bg: rgba(92, 122, 88, 0.1);
-    
-    /* 特殊功能色 */
-    --completed: rgba(69, 30, 2, 0.4);
-    --myday: #EAB84B;
-    --danger: #A64C38;
-    
-    /* 圆角体系 */
-    --radius-sm: 8px;
-    --radius: 12px;
-    --radius-lg: 16px;
-    
-    /* 暖咖色系光影 */
-    --shadow: 0 2px 8px rgba(69, 30, 2, 0.06);
-    --shadow-md: 0 6px 16px rgba(69, 30, 2, 0.12);
-    --shadow-focus: 0 0 0 3px rgba(234, 184, 75, 0.3);
-    
-    --transition: 0.2s ease-in-out;
+    --bg: #f1f5f9;
+    --sidebar-bg: #f8fafc;
+    --card-bg: #ffffff;
+    --border: #e2e8f0;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --primary: #2563eb;
+    --primary-light: #eff6ff;
+    --zhengshi: #3b82f6;
+    --zhengshi-bg: #eff6ff;
+    --zashi: #f59e0b;
+    --zashi-bg: #fffbeb;
+    --shenghuo: #10b981;
+    --shenghuo-bg: #ecfdf5;
+    --completed: #94a3b8;
+    --myday: #fbbf24;
+    --danger: #ef4444;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 6px rgba(0,0,0,.05), 0 2px 4px rgba(0,0,0,.04);
+    --transition: 0.2s cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif;background:var(--bg);color:var(--text);line-height:1.6;min-height:100vh;display:flex}
-a{color:var(--primary-active);text-decoration:none}
+a{color:var(--primary);text-decoration:none}
 a:hover{text-decoration:underline}
 button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
-
 .sidebar{width:240px;min-width:240px;background:var(--sidebar-bg);border-right:1px solid var(--border);display:flex;flex-direction:column;padding:20px 12px;gap:4px;user-select:none;overflow-y:auto}
 .sidebar-title{font-size:1.25rem;font-weight:700;padding:8px 12px 16px;display:flex;align-items:center;gap:8px}
 .sidebar-title svg{width:24px;height:24px;color:var(--primary)}
-.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--radius-sm);font-size:.9rem;color:var(--text-secondary);transition:var(--transition);position:relative}
-.nav-item:hover{background:var(--bg);color:var(--text)}
-.nav-item.active{background:var(--primary-light);color:var(--text);font-weight:600}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:.9rem;color:var(--text-secondary);transition:var(--transition);position:relative}
+.nav-item:hover{background:#e2e8f0;color:var(--text)}
+.nav-item.active{background:var(--primary-light);color:var(--primary);font-weight:600}
 .nav-item svg{width:18px;height:18px;flex-shrink:0}
-.nav-badge{position:absolute;right:10px;background:var(--primary);color:var(--text);font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:600;min-width:20px;text-align:center}
-.nav-item.active .nav-badge{background:var(--primary);color:var(--text)}
-.sidebar-divider{height:1px;background:var(--border);margin:8px 12px;opacity: 0.6;}
+.nav-badge{position:absolute;right:10px;background:var(--primary);color:#fff;font-size:.7rem;padding:2px 7px;border-radius:10px;font-weight:600;min-width:20px;text-align:center}
+.nav-item.active .nav-badge{background:var(--primary)}
+.sidebar-divider{height:1px;background:var(--border);margin:8px 12px}
 .list-section{display:flex;flex-direction:column;gap:2px;max-height:40vh;overflow-y:auto}
 .list-item .list-actions{display:none;position:absolute;right:4px;gap:2px}
 .list-item:hover .list-actions{display:flex}
 .list-item:hover .nav-badge{display:none}
 .list-mini-btn{padding:3px 5px;border-radius:4px;font-size:.65rem;color:var(--text-secondary);transition:var(--transition)}
-.list-mini-btn:hover{background:var(--border);color:var(--text)}
+.list-mini-btn:hover{background:#e2e8f0;color:var(--text)}
 .add-list-btn{color:var(--text-secondary);font-style:italic}
-.add-list-btn:hover{color:var(--primary-active)}
-
+.add-list-btn:hover{color:var(--primary)}
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden}
 .header{padding:24px 32px 0;display:flex;align-items:center;justify-content:space-between}
 .header h1{font-size:1.5rem;font-weight:700}
 .header-date{font-size:.85rem;color:var(--text-secondary)}
-
 .input-area{padding:16px 32px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-.input-row{display:flex;gap:10px;align-items:center;flex:1;min-width:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius-sm);padding:4px;box-shadow:var(--shadow);transition:var(--transition)}
-.input-row:focus-within{border-color:var(--primary);box-shadow:var(--shadow-focus)}
-.task-input{flex:1;border:none;outline:none;padding:10px 12px;font-size:.9rem;background:transparent;min-width:120px;color:var(--text)}
-.task-input::placeholder{color:var(--text-disabled)}
-.input-hint{font-size:.75rem;color:var(--text-disabled);padding:0 4px;white-space:nowrap}
+.input-row{display:flex;gap:10px;align-items:center;flex:1;min-width:0;background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:4px;box-shadow:var(--shadow);transition:var(--transition)}
+.input-row:focus-within{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.task-input{flex:1;border:none;outline:none;padding:10px 12px;font-size:.9rem;background:transparent;min-width:120px}
+.task-input::placeholder{color:var(--text-secondary)}
+.input-hint{font-size:.75rem;color:var(--text-secondary);padding:0 4px;white-space:nowrap}
 .cat-btns{display:flex;gap:4px;padding-right:4px}
 .cat-btn{padding:6px 12px;border-radius:6px;font-size:.8rem;font-weight:500;transition:var(--transition);border:1.5px solid transparent;white-space:nowrap}
 .cat-btn.zhengshi{color:var(--zhengshi)} .cat-btn.zhengshi.active{background:var(--zhengshi-bg);border-color:var(--zhengshi)}
 .cat-btn.zashi{color:var(--zashi)} .cat-btn.zashi.active{background:var(--zashi-bg);border-color:var(--zashi)}
 .cat-btn.shenghuo{color:var(--shenghuo)} .cat-btn.shenghuo.active{background:var(--shenghuo-bg);border-color:var(--shenghuo)}
-.add-btn{padding:12px 20px;background:var(--primary);color:var(--text);border-radius:var(--radius-sm);font-weight:600;font-size:.85rem;transition:var(--transition);white-space:nowrap;box-shadow:var(--shadow)}
-.add-btn:hover{background:var(--primary-hover)}
-
-.content{flex:1;overflow-y:auto;padding:8px 32px 32px;display:flex;flex-direction:column;gap:12px}
-
-/* 强化版分类卡片：预留左侧 4px 彩色边框 */
-.task-card{background:var(--card-bg);border:1px solid transparent;border-left:4px solid transparent;border-radius:var(--radius);padding:14px 16px;display:flex;align-items:flex-start;gap:12px;transition:var(--transition);box-shadow:var(--shadow);cursor:pointer;animation:fadeIn .25s ease}
-.task-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px)}
-.task-card.completed{opacity:.7}
+.add-btn{padding:12px 20px;background:var(--primary);color:#fff;border-radius:var(--radius);font-weight:600;font-size:.85rem;transition:var(--transition);white-space:nowrap;box-shadow:var(--shadow)}
+.add-btn:hover{background:#1d4ed8}
+.content{flex:1;overflow-y:auto;padding:8px 32px 32px;display:flex;flex-direction:column;gap:6px}
+.task-card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;align-items:flex-start;gap:12px;transition:var(--transition);box-shadow:var(--shadow);cursor:pointer;animation:fadeIn .25s ease}
+.task-card:hover{border-color:#cbd5e1;box-shadow:var(--shadow-md)}
+.task-card.completed{opacity:.6}
 .task-card.completed .task-name{text-decoration:line-through;color:var(--completed)}
-
-.task-card.cat-zhengshi{background:var(--zhengshi-bg);border-left-color:var(--zhengshi)}
-.task-card.cat-zashi{background:var(--zashi-bg);border-left-color:var(--zashi)}
-.task-card.cat-shenghuo{background:var(--shenghuo-bg);border-left-color:var(--shenghuo)}
-
+.task-card.cat-zhengshi{background:var(--zhengshi-bg)}
+.task-card.cat-zashi{background:var(--zashi-bg)}
+.task-card.cat-shenghuo{background:var(--shenghuo-bg)}
 @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-
-/* 复选框：适配不同分类的颜色 */
-.checkbox{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:var(--transition);background:var(--card-bg)}
-
-.task-card.cat-zhengshi .checkbox:hover{border-color:var(--zhengshi)}
-.task-card.cat-zhengshi.completed .checkbox{background:var(--zhengshi);border-color:var(--zhengshi)}
-
-.task-card.cat-zashi .checkbox:hover{border-color:var(--zashi)}
-.task-card.cat-zashi.completed .checkbox{background:var(--zashi);border-color:var(--zashi)}
-
-.task-card.cat-shenghuo .checkbox:hover{border-color:var(--shenghuo)}
-.task-card.cat-shenghuo.completed .checkbox{background:var(--shenghuo);border-color:var(--shenghuo)}
-
-.checkbox svg{width:12px;height:12px;color:var(--bg);opacity:0;transition:var(--transition)}
+.checkbox{width:20px;height:20px;border-radius:50%;border:2px solid #cbd5e1;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;transition:var(--transition)}
+.checkbox:hover{border-color:var(--primary)}
+.task-card.completed .checkbox{background:var(--primary);border-color:var(--primary)}
+.checkbox svg{width:12px;height:12px;color:#fff;opacity:0;transition:var(--transition)}
 .task-card.completed .checkbox svg{opacity:1}
-
 .task-body{flex:1;min-width:0}
-.task-time{font-size:.8rem;font-weight:600;color:var(--text-secondary);margin-right:6px;white-space:nowrap;flex-shrink:0}
-.task-name{font-size:.95rem;font-weight:500;word-break:break-word}
+.task-time{font-size:.8rem;font-weight:600;color:var(--primary);margin-right:6px;white-space:nowrap;flex-shrink:0}
+.task-name{font-size:.9rem;font-weight:500;word-break:break-word}
 .task-meta{display:flex;align-items:center;gap:8px;margin-top:4px;flex-wrap:wrap}
 
 .task-swipe-wrap{position:relative;border-radius:var(--radius);z-index:1}
-.swipe-bg{position:absolute;inset:0;background:var(--primary);color:var(--text);display:flex;align-items:center;padding-left:18px;border-radius:var(--radius);opacity:0;z-index:-1;transition:opacity 0.2s}
+.swipe-bg{position:absolute;inset:0;background:var(--primary);color:#fff;display:flex;align-items:center;padding-left:18px;border-radius:var(--radius);opacity:0;z-index:-1;transition:opacity 0.2s}
 
 /* 备注折叠样式 */
 .task-notes-wrapper{width:100%}
-.task-notes{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px;font-size:.85rem;color:var(--text-secondary);line-height:1.6;word-break:break-word;transition:all var(--transition)}
-.task-notes a{color:var(--primary-active);text-decoration:underline;word-break:break-all}
-.task-notes a:hover{color:var(--text)}
+.task-notes{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:6px;font-size:.8rem;color:var(--text-secondary);line-height:1.5;word-break:break-word;transition:all var(--transition)}
+.task-notes a{color:var(--primary);text-decoration:underline;word-break:break-all}
+.task-notes a:hover{color:#1d4ed8}
 .task-notes.expanded{-webkit-line-clamp:unset}
-.notes-toggle-btn{font-size:.75rem;color:var(--primary-active);cursor:pointer;display:none;margin-top:4px;user-select:none;display:inline-block}
+.notes-toggle-btn{font-size:.75rem;color:var(--primary);cursor:pointer;display:none;margin-top:4px;user-select:none;display:inline-block}
 .notes-toggle-btn:hover{text-decoration:underline}
-
-/* 去除底框，仅依靠颜色和字重区分的进度标签 */
-.progress-tag{color:var(--zashi); font-weight:700; margin-right:4px;}
 
 .task-actions{display:flex;gap:2px;flex-shrink:0;align-items:center}
 .icon-btn{padding:6px;border-radius:6px;transition:var(--transition);display:flex;color:var(--text-secondary)}
-.icon-btn:hover{background:rgba(69, 30, 2, 0.05);color:var(--text)}
+.icon-btn:hover{background:#f1f5f9;color:var(--text)}
 .icon-btn.myday-active{color:var(--myday)}
-.icon-btn.danger:hover{background:var(--zhengshi-bg);color:var(--danger)}
+.icon-btn.danger:hover{background:#fef2f2;color:var(--danger)}
 .icon-btn svg{width:16px;height:16px}
-
-.empty-state{text-align:center;padding:80px 20px;color:var(--text-disabled)}
-.empty-state svg{width:48px;height:48px;margin-bottom:16px;opacity:.5;color:var(--primary)}
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-secondary)}
+.empty-state svg{width:48px;height:48px;margin-bottom:12px;opacity:.4}
 .empty-state p{font-size:.9rem}
-
 .archive-toolbar{display:flex;align-items:center;gap:12px;padding:16px 32px;flex-wrap:wrap;justify-content:space-between}
 .archive-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.filter-label{font-size:.85rem;color:var(--text-secondary);font-weight:500}
-.filter-chip{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);transition:var(--transition);background:var(--card-bg);color:var(--text-secondary)}
+.filter-label{font-size:.8rem;color:var(--text-secondary);font-weight:500}
+.filter-chip{padding:6px 14px;border-radius:20px;font-size:.8rem;font-weight:500;border:1.5px solid var(--border);transition:var(--transition);background:#fff}
 .filter-chip.active.zhengshi{background:var(--zhengshi-bg);border-color:var(--zhengshi);color:var(--zhengshi)}
 .filter-chip.active.zashi{background:var(--zashi-bg);border-color:var(--zashi);color:var(--zashi)}
 .filter-chip.active.shenghuo{background:var(--shenghuo-bg);border-color:var(--shenghuo);color:var(--shenghuo)}
-.export-btn{padding:8px 16px;background:var(--card-bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:.8rem;font-weight:500;transition:var(--transition);display:flex;align-items:center;gap:6px;color:var(--text)}
-.export-btn:hover{background:var(--bg);border-color:var(--primary)}
-
+.export-btn{padding:8px 16px;background:#fff;border:1.5px solid var(--border);border-radius:8px;font-size:.8rem;font-weight:500;transition:var(--transition);display:flex;align-items:center;gap:6px}
+.export-btn:hover{background:#f8fafc;border-color:#94a3b8}
 .timeline{padding:0 32px 32px;display:flex;flex-direction:column;gap:24px}
 .timeline-day{animation:slideIn .3s ease}
-.timeline-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1;user-select:none;}
-.timeline-date{font-size:1.05rem;font-weight:700}
-.timeline-count{font-size:.75rem;color:var(--text-secondary);background:var(--border);padding:2px 8px;border-radius:10px}
-.timeline-tasks{display:flex;flex-direction:column;gap:12px}
+.timeline-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:1;user-select:none;}
+.timeline-date{font-size:1rem;font-weight:700}
+.timeline-count{font-size:.75rem;color:var(--text-secondary);background:#e2e8f0;padding:2px 8px;border-radius:10px}
+.timeline-tasks{display:flex;flex-direction:column;gap:6px}
 .timeline-tasks .task-card{cursor:default}
 .archive-arrow{width:16px;height:16px;transition:var(--transition);color:var(--text-secondary);margin-right:2px;}
 .archive-arrow.open{transform:rotate(90deg);}
 
 .toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;flex-direction:column;gap:8px}
-.toast{padding:12px 24px;border-radius:var(--radius-sm);background:var(--text);color:#fff;font-size:.9rem;box-shadow:var(--shadow-md);animation:toastIn .25s ease,toastOut .25s ease 1.75s forwards}
+.toast{padding:10px 20px;border-radius:8px;background:#1e293b;color:#fff;font-size:.85rem;box-shadow:0 4px 16px rgba(0,0,0,.15);animation:toastIn .25s ease,toastOut .25s ease 1.75s forwards}
 @keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes toastOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-8px)}}
-
-.modal-overlay{position:fixed;inset:0;background:rgba(69, 30, 2, 0.3);backdrop-filter:blur(2px);z-index:999;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:999;display:flex;align-items:center;justify-content:center;animation:fadeIn .2s ease}
 .modal-overlay.hidden{display:none}
-.modal-box{background:var(--card-bg);border-radius:var(--radius-lg);padding:28px 24px 24px;width:90%;max-width:440px;box-shadow:0 20px 40px rgba(69,30,2,.15);animation:slideIn .2s ease}
-.modal-box h2{font-size:1.2rem;font-weight:700;margin-bottom:18px;color:var(--text)}
-.modal-box label{display:block;font-size:.8rem;color:var(--text-secondary);margin-bottom:6px;margin-top:16px;font-weight:500}
-.modal-box input,.modal-box textarea{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:.95rem;font-family:inherit;outline:none;transition:var(--transition);box-sizing:border-box;color:var(--text);background:var(--bg)}
-.modal-box input:focus,.modal-box textarea:focus{border-color:var(--primary);box-shadow:var(--shadow-focus);background:var(--card-bg)}
-.modal-box textarea{min-height:100px;resize:vertical}
-.modal-cats{display:flex;gap:8px;margin-top:6px}
-.modal-cat-btn{padding:8px 18px;border-radius:var(--radius-sm);border:1.5px solid var(--border);font-size:.85rem;font-weight:500;transition:var(--transition);background:var(--card-bg);cursor:pointer;color:var(--text-secondary)}
-.modal-cat-btn:hover{background:var(--bg)}
+.modal-box{background:#fff;border-radius:14px;padding:28px 24px 20px;width:90%;max-width:440px;box-shadow:0 20px 60px rgba(0,0,0,.2);animation:slideIn .2s ease}
+.modal-box h2{font-size:1.1rem;font-weight:700;margin-bottom:18px}
+.modal-box label{display:block;font-size:.78rem;color:var(--text-secondary);margin-bottom:4px;margin-top:14px;font-weight:500}
+.modal-box input,.modal-box textarea{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-size:.9rem;font-family:inherit;outline:none;transition:var(--transition);box-sizing:border-box}
+.modal-box input:focus,.modal-box textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.modal-box textarea{min-height:90px;resize:vertical}
+.modal-cats{display:flex;gap:8px;margin-top:4px}
+.modal-cat-btn{padding:8px 18px;border-radius:8px;border:1.5px solid var(--border);font-size:.85rem;font-weight:500;transition:var(--transition);background:#fff;cursor:pointer}
+.modal-cat-btn:hover{background:#f8fafc}
 .modal-cat-btn.sel.zhengshi{background:var(--zhengshi-bg);border-color:var(--zhengshi);color:var(--zhengshi)}
 .modal-cat-btn.sel.zashi{background:var(--zashi-bg);border-color:var(--zashi);color:var(--zashi)}
 .modal-cat-btn.sel.shenghuo{background:var(--shenghuo-bg);border-color:var(--shenghuo);color:var(--shenghuo)}
-.modal-actions{display:flex;gap:12px;margin-top:28px;justify-content:flex-end}
-.modal-save{padding:10px 28px;background:var(--primary);color:var(--text);border-radius:var(--radius-sm);font-weight:600;font-size:.95rem;transition:var(--transition);box-shadow:var(--shadow)}
-.modal-save:hover{background:var(--primary-hover);transform:translateY(-1px)}
-.modal-cancel{padding:10px 28px;background:var(--bg);color:var(--text);border-radius:var(--radius-sm);font-weight:500;font-size:.95rem;transition:var(--transition)}
-.modal-cancel:hover{background:var(--border)}
+.modal-actions{display:flex;gap:10px;margin-top:22px;justify-content:flex-end}
+.modal-save{padding:10px 26px;background:var(--primary);color:#fff;border-radius:8px;font-weight:600;font-size:.9rem;transition:var(--transition)}
+.modal-save:hover{background:#1d4ed8}
+.modal-cancel{padding:10px 26px;background:#f1f5f9;color:var(--text);border-radius:8px;font-weight:500;font-size:.9rem;transition:var(--transition)}
+.modal-cancel:hover{background:#e2e8f0}
 
 @media(max-width:640px){
 body{flex-direction:column}
-.sidebar{width:100%;min-width:0;flex-direction:row;padding:8px 12px;gap:6px;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border);background:var(--card-bg)}
+.sidebar{width:100%;min-width:0;flex-direction:row;padding:8px 12px;gap:4px;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border)}
 .sidebar-title{display:none}
 .sidebar-divider{display:none}
 .list-section{display:none}
 .add-list-btn{display:none}
-.nav-item{padding:8px 14px;font-size:.85rem;white-space:nowrap}
-.nav-badge{position:static;margin-left:4px}
-.input-area,.archive-toolbar,.content,.timeline{padding-left:16px;padding-right:16px}
-.header{padding:20px 16px 0}
-.input-area{flex-direction:column;gap:10px;padding-top:16px;padding-bottom:16px}
-.input-row{width:100%;flex-wrap:wrap;gap:8px;padding:6px 8px}
+.nav-item{padding:8px 12px;font-size:.8rem;white-space:nowrap}
+.nav-badge{position:static}
+.input-area,.archive-toolbar,.content,.timeline{padding-left:12px;padding-right:12px}
+.header{padding:16px 12px 0}
+.input-area{flex-direction:column;gap:8px;padding-top:12px;padding-bottom:12px}
+.input-row{width:100%;flex-wrap:wrap;gap:6px;padding:6px 8px}
 .task-input{font-size:1rem;min-width:100px}
-.cat-btns{gap:4px}
-.cat-btn{padding:6px 10px;font-size:.75rem}
-.add-btn{width:100%;padding:14px;font-size:.95rem;text-align:center}
-.archive-toolbar{gap:10px;padding:16px 16px;justify-content:flex-start}
-.filter-chip{padding:6px 12px;font-size:.75rem}
-.export-btn{padding:8px 12px;font-size:.75rem;margin-left:auto}
-.task-card{padding:12px;}
+.cat-btns{gap:3px}
+.cat-btn{padding:5px 8px;font-size:.72rem}
+.add-btn{width:100%;padding:12px;font-size:.9rem;text-align:center}
+.archive-toolbar{gap:8px;padding:12px 12px;justify-content:flex-start}
+.filter-chip{padding:5px 10px;font-size:.72rem}
+.export-btn{padding:6px 10px;font-size:.72rem;margin-left:auto}
 }
 </style>
 </head>
@@ -233,7 +186,7 @@ body{flex-direction:column}
 
 <nav class="sidebar">
     <div class="sidebar-title">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v18"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M9 3v18"/></svg>
         任务管理
     </div>
     <button class="nav-item active" data-view="all">
@@ -249,7 +202,7 @@ body{flex-direction:column}
     <button class="nav-item" data-view="weathered">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
         风化
-        <span class="nav-badge" id="badge-weathered" style="background:var(--border); color:var(--text);">0</span>
+        <span class="nav-badge" id="badge-weathered" style="background:var(--completed)">0</span>
     </button>
     <div class="sidebar-divider"></div>
     <div class="list-section" id="list-section"></div>
@@ -304,11 +257,11 @@ body{flex-direction:column}
     <div id="view-content"></div>
 </main>
 <div class="toast-container" id="toast-container"></div>
-
 <div class="modal-overlay hidden" id="task-modal">
     <div class="modal-box">
         <h2>任务详情</h2>
-        <div id="modal-date-display" style="font-size: 0.8rem; color: var(--text-disabled); margin-top: -12px; margin-bottom: 12px;"></div>
+        <!-- 简化后的日期显示在详情中 -->
+        <div id="modal-date-display" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: -12px; margin-bottom: 12px;"></div>
         
         <label>任务名</label>
         <input id="modal-name" type="text" maxlength="200">
@@ -340,7 +293,7 @@ body{flex-direction:column}
 
 <script>
 (function(){
-const APP_VERSION = 'offline-dual-handoff-v1.4-2026-06-03';
+const APP_VERSION = 'offline-dual-handoff-v1.2-2026-06-01';
 const STORAGE_PREFIX = 'todo_offline_dual_handoff_v1_';
 const STORAGE_KEY = STORAGE_PREFIX + 'tasks';
 const LISTS_KEY = STORAGE_PREFIX + 'lists';
@@ -440,8 +393,8 @@ function renderNotes(notes){
     let html=notes.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     html=html.replace(urlRe,function(url){return '<a href="'+url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">'+url+'</a>';});
     
-    // 无底框、仅颜色区分的进度标签
-    html=html.replace(/【进度 (.*?)】/g, '<strong class="progress-tag">【进度 $1】</strong>');
+    // 高亮进度锚点标签
+    html=html.replace(/【进度 (.*?)】/g, '<strong style="color:var(--primary)">【进度 $1】</strong>');
     return html;
 }
 function formatDate(ts){
@@ -1312,7 +1265,7 @@ const App={
         
         const tip = document.createElement('div');
         tip.style.padding = '8px 32px 16px';
-        tip.innerHTML = '<span style="font-size:.85rem;color:var(--text-secondary);display:inline-block;background:var(--card-bg);border:1px solid var(--border);padding:8px 14px;border-radius:var(--radius-sm);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>存放创建超 5 天未完成且不在「我的一天」的任务。将其加入「我的一天」可重置倒计时并恢复正常显示。</span>';
+        tip.innerHTML = '<span style="font-size:.85rem;color:var(--text-secondary);display:inline-block;background:var(--border);padding:6px 12px;border-radius:6px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;vertical-align:-2px;margin-right:4px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>存放创建超 5 天未完成且不在「我的一天」的任务。将其加入「我的一天」可重置倒计时并恢复正常显示。</span>';
         content.appendChild(tip);
 
         if(tasks.length===0){
@@ -1377,6 +1330,7 @@ const App={
         wrap.appendChild(bg);
 
         const card=document.createElement('div');
+        // 卡片本身的 cat 类保留，作为背景色区分
         card.className='task-card cat-'+task.category+(task.completed?' completed':'')+(task.inMyDay?' myday':'');
         card.dataset.id=task.id;
         const escapedName=task.name.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -1385,6 +1339,7 @@ const App={
         const notesBlock=(!task.completed&&task.notes)?'<div class="task-notes-wrapper"><div class="task-notes">'+renderNotes(task.notes)+'</div></div>':'';
         const mydayBtn=showMyDay?'<button class="icon-btn'+(task.inMyDay?' myday-active':'')+'" title="'+(task.inMyDay?'从我的一天移除':'添加到我的一天')+'"><svg viewBox="0 0 24 24" fill="'+(task.inMyDay?'currentColor':'none')+'" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>':'';
         
+        // 简化了卡片内容，隐藏了时间和分类标签
         card.innerHTML='<div class="checkbox">'+completedCheck+'</div>'+
             '<div class="task-body">'+
             (task.completed?
@@ -1493,9 +1448,11 @@ const App={
             groups[key].push(t);
         });
         
+        // 日期改为倒序排列
         const sortedKeys=Object.keys(groups).sort(function(a,b){return b.localeCompare(a);});
         const timeline=document.createElement('div');timeline.className='timeline';
         
+        // 获取今日日期标识
         const todayDate = new Date();
         const todayKey = todayDate.getFullYear() + '-' + String(todayDate.getMonth()+1).padStart(2,'0') + '-' + String(todayDate.getDate()).padStart(2,'0');
 
@@ -1503,6 +1460,7 @@ const App={
             const isToday = (key === todayKey);
             const dayDiv=document.createElement('div');dayDiv.className='timeline-day';
             
+            // 加入展开/折叠箭头指示器
             const arrowSvg = `<svg class="archive-arrow ${isToday ? 'open' : ''}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>`;
             
             dayDiv.innerHTML='<div class="timeline-header" style="cursor:pointer" title="点击展开/折叠">' + 
@@ -1513,6 +1471,7 @@ const App={
                 
             const tasksDiv=document.createElement('div');tasksDiv.className='timeline-tasks';
             
+            // 非今日的任务默认折叠
             if (!isToday) {
                 tasksDiv.style.display = 'none';
             }
@@ -1520,6 +1479,7 @@ const App={
             groups[key].sort(function(a,b){return b.completedAt-a.completedAt;}).forEach(function(t){tasksDiv.appendChild(self.createTaskCard(t,false));});
             dayDiv.appendChild(tasksDiv);
             
+            // 绑定折叠点击事件
             dayDiv.querySelector('.timeline-header').addEventListener('click', function() {
                 const isHidden = tasksDiv.style.display === 'none';
                 tasksDiv.style.display = isHidden ? 'flex' : 'none';
@@ -1537,60 +1497,41 @@ const App={
         h1.textContent = '版本记录';
         content.innerHTML = `
             <div class="content" style="padding-top: 16px; max-width: 680px;">
-                <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
-                    <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--primary-active);">
-                        v1.4 
-                        <span style="font-size:0.8rem; color:var(--text); font-weight:normal; background: var(--primary-light); padding: 2px 8px; border-radius: 12px;">2026-06-03</span>
+                <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
+                    <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--primary);">
+                        v1.2 
+                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--bg); padding: 2px 8px; border-radius: 12px;">2026-06-01</span>
                     </h3>
                     <ul style="padding-left: 20px; color: var(--text); font-size: 0.9rem; line-height: 1.8;">
-                        <li><strong>卡片分类强化</strong>：任务卡片左侧增加分类色高亮边条，即使在快速扫视时也能瞬间分辨正事、杂事与生活，分类一目了然。</li>
-                        <li><strong>交互反馈升级</strong>：复选框的悬停（Hover）和完成状态，会智能匹配当前任务的分类颜色（铁锈红/琥珀黄/鼠尾草绿），视觉连贯性更强。</li>
-                        <li><strong>进度标签视觉极简</strong>：去除了进度记录周围冗余的背景框和边距，改用高对比度的纯文本加粗展现，让长文本阅读更加沉浸。</li>
-                    </ul>
-                </div>
-
-                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
-                    <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--text);">
-                        v1.3 
-                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--border); padding: 2px 8px; border-radius: 12px;">2026-06-02</span>
-                    </h3>
-                    <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
-                        <li>全面升级 UI 视觉：引入「焦糖奶咖」大地色主题色系，基于小米 HIUI 规范重构整个视觉体系。</li>
-                        <li>分类色彩优化与高辨识度：采用了带有警惕感的铁锈红、作为温和过渡的琥珀黄、以及充满松弛感的鼠尾草绿。</li>
-                        <li>操作确认感提升：卡片交互、按钮 Hover 动作及输入框激活状态增加了光晕及动效反馈。</li>
-                    </ul>
-                </div>
-                
-                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
-                    <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--text);">
-                        v1.2 
-                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--border); padding: 2px 8px; border-radius: 12px;">2026-06-01</span>
-                    </h3>
-                    <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
                         <li>新增“风化”特殊清单：静默清理创建超 5 天未完成且不在「我的一天」的任务，减少注意力分散。</li>
-                        <li>新增“进度记录”功能：右滑任务卡片可快速添加阶段性进展。</li>
+                        <li>新增“进度记录”功能：右滑任务卡片可快速添加阶段性进展，多次记录自动聚合时间并在最前展示（由 - 隔开）。</li>
                     </ul>
                 </div>
 
-                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
+                <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
                     <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--text);">
                         v1.1 
-                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--border); padding: 2px 8px; border-radius: 12px;">2026-06-01</span>
+                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--bg); padding: 2px 8px; border-radius: 12px;">2026-06-01</span>
                     </h3>
-                    <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
-                        <li>归档时间轴优化：日期倒序排列，今日任务默认展开，非今日任务折叠</li>
-                        <li>新增【版本记录】页面，任务备注超长自动折叠</li>
+                    <ul style="padding-left: 20px; color: var(--text); font-size: 0.9rem; line-height: 1.8;">
+                        <li>归档时间轴优化：日期倒序排列，今日任务默认展开，非今日任务折叠（只显示日期），点击可展开完整时间线</li>
+                        <li>新增【版本记录】页面</li>
+                        <li>任务备注自动折叠：当任务备注超过两行时自动折叠，并支持点击展开/收起查看全文</li>
+                        <li>界面简化优化：列表页隐藏创建日期与分类文字标签（保留颜色提示），相关信息移至任务详情页展示，卡片更加清爽</li>
                     </ul>
                 </div>
                 
-                <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
+                <div style="background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 20px;">
                     <h3 style="display:flex; align-items:center; gap:12px; margin-bottom: 12px; font-size: 1.1rem; color: var(--text);">
                         v1.0 
-                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--border); padding: 2px 8px; border-radius: 12px;">2026-05-30</span>
+                        <span style="font-size:0.8rem; color:var(--text-secondary); font-weight:normal; background: var(--bg); padding: 2px 8px; border-radius: 12px;">2026-05-30</span>
                     </h3>
                     <ul style="padding-left: 20px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8;">
                         <li>任务管理基础功能上线发布</li>
+                        <li>手机、电脑双端响应式独立使用</li>
                         <li>引入坚果云 WebDAV 支持多设备数据手动同步</li>
+                        <li>支持手机端作为 PWA 应用添加到桌面</li>
+                        <li>支持我的一天、任务归档功能</li>
                     </ul>
                 </div>
             </div>
@@ -1604,5 +1545,36 @@ document.addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 
+<div class="modal-overlay hidden" id="sync-modal">
+    <div class="modal-box">
+        <h2>坚果云同步设置</h2>
+        <label>WebDAV 地址</label>
+        <input id="sync-url" type="text" placeholder="https://dav.jianguoyun.com/dav/todo/data.json（文件夹需先在坚果云中创建）">
+        <label>本地代理地址（旧版 WebDAV 用，本版通常不用）</label>
+        <input id="sync-proxy-url" type="text" placeholder="纯离线接力不需要填写">
+        <label>坚果云账号（邮箱）</label>
+        <input id="sync-user" type="text" placeholder="your@email.com">
+        <label>应用密码（在坚果云「安全选项」中生成）</label>
+        <input id="sync-pass" type="password" placeholder="第三方应用密码，非登录密码">
+        <div style="display:flex;gap:8px;margin-top:14px;align-items:center">
+            <button type="button" class="modal-save" id="sync-test" style="background:#f59e0b">测试连接</button>
+            <span id="sync-status" style="font-size:.78rem;color:var(--text-secondary)"></span>
+        </div>
+        <label style="margin-top:14px">
+            <input type="checkbox" id="sync-enable"> 启用接力同步按钮（不自动上传）
+        </label>
+        <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--border)">
+            <p style="font-size:.78rem;color:var(--text-secondary);margin-bottom:8px">换设备前，在旧设备上传；换设备后，在新设备接收。两端平时都只保存在本机。</p>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button type="button" class="modal-save" id="sync-upload-now" style="background:#2563eb">上传本机数据</button>
+                <button type="button" class="modal-save" id="sync-download-now" style="background:#0f766e">接收云端数据</button>
+            </div>
+        </div>
+        <div class="modal-actions">
+            <button type="button" class="modal-cancel" id="sync-cancel">关闭</button>
+            <button type="button" class="modal-save" id="sync-save">保存设置</button>
+        </div>
+    </div>
+</div>
 </body>
 </html>
