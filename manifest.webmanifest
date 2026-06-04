@@ -1,13 +1,11 @@
 {
-  "name": "任务管理接力",
-  "short_name": "任务接力",
-  "description": "电脑和手机独立使用的任务管理接力工具",
+  "name": "任务管理",
+  "short_name": "任务管理",
+  "description": "极简高级感本地任务管理与接力工具",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
-  "background_color": "#f1f5f9",
-  "theme_color": "#2563eb",
-  "orientation": "portrait",
+  "background_color": "#080808",
+  "theme_color": "#080808",
   "icons": [
     {
       "src": "icons/icon-192.png",
